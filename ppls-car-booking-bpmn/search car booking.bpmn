@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_08itfno" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="2.0.1">
+  <bpmn:collaboration id="Collaboration_0n9z4kk">
+    <bpmn:participant id="Participant_0zlombt" name="Car Rental" processRef="Process_1" />
+    <bpmn:participant id="Participant_1fgyfer" name="Penggunass7" processRef="Process_04gtago" />
+    <bpmn:messageFlow id="MessageFlow_11ssup6" sourceRef="Participant_1fgyfer" targetRef="StartEvent_1nvbj4r" />
+    <bpmn:messageFlow id="MessageFlow_1bj2cee" sourceRef="Task_1on52om" targetRef="Participant_1fgyfer" />
+  </bpmn:collaboration>
+  <bpmn:process id="Process_1" isExecutable="true">
+    <bpmn:laneSet id="LaneSet_1u76b3w">
+      <bpmn:lane id="Lane_0ul34o2" name="Pencarians3s">
+        <bpmn:flowNodeRef>Task_1on52om</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>StartEvent_1nvbj4r</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EndEvent_16776i3</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_1yrpv1r</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:dataStoreReference id="DataStoreReference_03h1qto" name="Booking Data Store" />
+    <bpmn:serviceTask id="Task_1on52om" name="Cek Ketersediaan Mobilsss6">
+      <bpmn:extensionElements>
+        <camunda:connector>
+          <camunda:inputOutput>
+            <camunda:inputParameter name="url">
+              <camunda:script scriptFormat="javascript">var url = "http://localhost:8000/api/v1/cars?pick=" + execution.getVariable("FormPick") + "&amp;date=" + execution.getVariable("FormDate");
+url;</camunda:script>
+            </camunda:inputParameter>
+            <camunda:inputParameter name="method">GET</camunda:inputParameter>
+            <camunda:inputParameter name="header">
+              <camunda:map>
+                <camunda:entry key="Accept">application/json</camunda:entry>
+                <camunda:entry key="Content-Type">application/json</camunda:entry>
+              </camunda:map>
+            </camunda:inputParameter>
+            <camunda:outputParameter name="carList">
+              <camunda:script scriptFormat="javascript">S(response);</camunda:script>
+            </camunda:outputParameter>
+          </camunda:inputOutput>
+          <camunda:connectorId>http-connector</camunda:connectorId>
+        </camunda:connector>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_0pu6g8q</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0jyvt8l</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:startEvent id="StartEvent_1nvbj4r" name="Book Request Detail">
+      <bpmn:outgoing>SequenceFlow_11dt0ta</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:endEvent id="EndEvent_16776i3">
+      <bpmn:incoming>SequenceFlow_0jyvt8l</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:userTask id="Task_1yrpv1r" name="Terima tanggal dan penjemputan" camunda:assignee="demo">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="FormDate" label="date" type="string" />
+          <camunda:formField id="FormPick" label="pick" type="string" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_11dt0ta</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0pu6g8q</bpmn:outgoing>
+      <bpmn:property id="Property_1qbs93g" name="__targetRef_placeholder" />
+      <bpmn:dataInputAssociation id="DataInputAssociation_1g6yoj2">
+        <bpmn:sourceRef>DataStoreReference_03h1qto</bpmn:sourceRef>
+        <bpmn:targetRef>Property_1qbs93g</bpmn:targetRef>
+      </bpmn:dataInputAssociation>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="SequenceFlow_11dt0ta" sourceRef="StartEvent_1nvbj4r" targetRef="Task_1yrpv1r" />
+    <bpmn:sequenceFlow id="SequenceFlow_0pu6g8q" sourceRef="Task_1yrpv1r" targetRef="Task_1on52om" />
+    <bpmn:sequenceFlow id="SequenceFlow_0jyvt8l" sourceRef="Task_1on52om" targetRef="EndEvent_16776i3" />
+  </bpmn:process>
+  <bpmn:process id="Process_04gtago" isExecutable="false" />
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_0n9z4kk">
+      <bpmndi:BPMNShape id="Participant_0zlombt_di" bpmnElement="Participant_0zlombt">
+        <dc:Bounds x="341" y="200" width="538" height="235" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_0ul34o2_di" bpmnElement="Lane_0ul34o2">
+        <dc:Bounds x="371" y="200" width="508" height="235" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Participant_1fgyfer_di" bpmnElement="Participant_1fgyfer">
+        <dc:Bounds x="341" y="34" width="547" height="125" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="MessageFlow_11ssup6_di" bpmnElement="MessageFlow_11ssup6">
+        <di:waypoint x="447" y="159" />
+        <di:waypoint x="447" y="237" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="DataStoreReference_03h1qto_di" bpmnElement="DataStoreReference_03h1qto">
+        <dc:Bounds x="421" y="306" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="413" y="363" width="67" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="MessageFlow_1bj2cee_di" bpmnElement="MessageFlow_1bj2cee">
+        <di:waypoint x="692" y="215" />
+        <di:waypoint x="692" y="159" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ServiceTask_0mitqw6_di" bpmnElement="Task_1on52om">
+        <dc:Bounds x="642" y="215" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_1cz23s5_di" bpmnElement="StartEvent_1nvbj4r">
+        <dc:Bounds x="429" y="237" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="412" y="280" width="71" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_16776i3_di" bpmnElement="EndEvent_16776i3">
+        <dc:Bounds x="780" y="237" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0jyvt8l_di" bpmnElement="SequenceFlow_0jyvt8l">
+        <di:waypoint x="742" y="255" />
+        <di:waypoint x="780" y="255" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="UserTask_1j9xf2p_di" bpmnElement="Task_1yrpv1r">
+        <dc:Bounds x="504" y="215" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0pu6g8q_di" bpmnElement="SequenceFlow_0pu6g8q">
+        <di:waypoint x="604" y="255" />
+        <di:waypoint x="642" y="255" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_11dt0ta_di" bpmnElement="SequenceFlow_11dt0ta">
+        <di:waypoint x="465" y="255" />
+        <di:waypoint x="504" y="255" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataInputAssociation_1g6yoj2_di" bpmnElement="DataInputAssociation_1g6yoj2">
+        <di:waypoint x="471" y="313" />
+        <di:waypoint x="505" y="289" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

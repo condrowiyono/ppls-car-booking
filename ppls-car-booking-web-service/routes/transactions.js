@@ -27,4 +27,9 @@ router.put('/cancelbooking/', function(req, res) {
 	transactionsController.cancelBooking(req,res)
 });
 
+
+router.put('/expireBooking/', function(req, res) {
+	transactionsController.expireBooking(req,res)
+});
+
 module.exports = router;

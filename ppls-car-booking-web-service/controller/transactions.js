@@ -94,5 +94,18 @@ exports.cancelBooking = function(req, res){
 	});
 }
 
+exports.expireBooking = function(req, res){
+	db.transactions.update({
+		id: req.body.id,
+		status: 3,
+		expiredAt: Date.now(),
+	}, {where:{id: req.body.id}}).then(transaction => {
+		res.json({
+			"status": "Expire Booking Success",
+			"data" : transaction,
+			});
+		});
+	}
+	
 exports.delete = function(req,res){
 }

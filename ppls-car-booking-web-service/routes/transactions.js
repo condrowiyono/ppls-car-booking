@@ -15,8 +15,8 @@ router.get('/:id', function(req, res) {
 	transactionsController.find(req,res)
 });
 
-router.put('/', function(req, res) {
-	transactionsController.update(req,res)
+router.put('/successBooking', function(req, res) {
+	transactionsController.successBooking(req,res)
 });
 
 router.delete('/:id', function(req, res) {

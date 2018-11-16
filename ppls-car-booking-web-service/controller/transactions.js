@@ -61,12 +61,17 @@ exports.find = function(req, res) {
     });
 }
 
-exports.update = function(req, res){
+exports.successBooking = function(req, res){
 	db.transactions.update({
 		id: req.body.id,
 		status: 1,
 		bookedAt: Date.now(),
-	}, {where:{id: req.body.id}}).then(transaction => {
+	}, {where:{id: req.body.id}})
+	.then(affectedRow => {
+		return db.transactions.findOne({where: {id:req.body.id}})
+	})
+
+	.then(transaction => {
 		res.json({
 			"status": "Success",
 			"data" : transaction,
@@ -99,13 +104,19 @@ exports.expireBooking = function(req, res){
 		id: req.body.id,
 		status: 3,
 		expiredAt: Date.now(),
-	}, {where:{id: req.body.id}}).then(transaction => {
+	}, {where:{id: req.body.id}})
+	
+	.then(affectedRow => {
+		return db.transactions.findOne({where: {id:req.body.id}})
+	})
+
+	.then(transaction => {
 		res.json({
-			"status": "Expire Booking Success",
+			"status": "Expired",
 			"data" : transaction,
-			});
 		});
-	}
+	});
+}
 	
 exports.delete = function(req,res){
 }

@@ -74,5 +74,25 @@ exports.update = function(req, res){
 	});
 }
 
+exports.cancelBooking = function(req, res){
+	db.transactions.update({
+		id: req.body.id,
+		status: 2,
+		cancelAt:Date.now(),
+		updatedAt:Date.now(),
+	}, {where:{id: req.body.id}})
+
+	.then(affectedRow => {
+		return db.transactions.findOne({where: {id:req.body.id}})
+	})
+
+	.then(transaction => {
+		res.json({
+			"status": "Cancelled",
+			"data" : transaction,
+		});
+	});
+}
+
 exports.delete = function(req,res){
 }

@@ -23,4 +23,8 @@ router.delete('/:id', function(req, res) {
 	transactionsController.delete(req,res)
 });
 
+router.put('/expireBooking/', function(req, res) {
+	transactionsController.expireBooking(req,res)
+});
+
 module.exports = router;

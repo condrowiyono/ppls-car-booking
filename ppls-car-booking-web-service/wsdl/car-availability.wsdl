@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions 
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"  
+    xmlns:tns="http://www.example.org/CarAvailability/" 
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+    name="CarAvailability" 
+    targetNamespace="http://www.example.org/CarAvailability/">
+    <wsdl:types>
+        <xsd:schema targetNamespace="http://www.example.org/CarAvailability/">
+            <xsd:element name="AvailabilityRequest">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="pickLocation" type="xsd:string"></xsd:element>
+                        <xsd:element name="pickDateTime" type="xsd:dateTime"></xsd:element>
+                        <xsd:element name="dropLocation" type="xsd:string"></xsd:element>
+                        <xsd:element name="dropDateTime" type="xsd:dateTime"></xsd:element>
+                        <xsd:element name="typeCode" type="xsd:string" maxOccurs="1" minOccurs="0"></xsd:element>
+                        <xsd:element name="sortMethod" type="xsd:int" maxOccurs="1" minOccurs="0"></xsd:element>
+                        <xsd:element name="priceFrom" type="xsd:float" maxOccurs="1" minOccurs="0"> </xsd:element>
+                        <xsd:element name="priceTo" type="xsd:float" maxOccurs="1" minOccurs="0"></xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>  
+            </xsd:element>
+            <xsd:element name="AvailabilityResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="searchSummary">
+                         <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="pickLocation"
+                                    type="xsd:string">
+                                </xsd:element>
+                                <xsd:element name="pickDateTime"
+                                    type="xsd:dateTime">
+                                </xsd:element>
+                                <xsd:element name="dropLocation"
+                                    type="xsd:string">
+                                </xsd:element>
+                                <xsd:element name="dropDateTime"
+                                    type="xsd:dateTime">
+                                </xsd:element>
+                                <xsd:element name="typeCode" type="xsd:string"
+                                    maxOccurs="1" minOccurs="0">
+                                </xsd:element>
+                                <xsd:element name="sortMethod" type="xsd:int"
+                                    maxOccurs="1" minOccurs="0">
+                                </xsd:element>
+                                <xsd:element name="priceFrom" type="xsd:float"
+                                    maxOccurs="1" minOccurs="0">
+                                </xsd:element>
+                                <xsd:element name="priceTo" type="xsd:float" maxOccurs="1" minOccurs="0"></xsd:element>
+                            </xsd:sequence>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="arrayCarAvailable" minOccurs="0" maxOccurs="unbounded">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="rate" type="xsd:float"></xsd:element>
+                                <xsd:element name="frequency" type="xsd:string"></xsd:element>
+                                <xsd:element name="Car">
+                                    <xsd:complexType>
+                                        <xsd:sequence>
+                                            <xsd:element name="carID">
+                                                <xsd:complexType>
+                                                    <xsd:sequence>
+                                                        <xsd:element name="vendor" type="xsd:string"></xsd:element>
+                                                        <xsd:element name="id" type="xsd:int"></xsd:element>
+                                                    </xsd:sequence>
+                                                </xsd:complexType>
+                                            </xsd:element>
+                                            <xsd:element name="model" type="xsd:string"></xsd:element>
+                                            <xsd:element name="type" type="xsd:string"></xsd:element>
+                                            <xsd:element name="seats" type="xsd:int"></xsd:element>
+                                            <xsd:element name="rate" type="xsd:float"></xsd:element>
+                                            <xsd:element name="gear" type="xsd:int"></xsd:element>
+                                            <xsd:element name="have_ac" type="xsd:int"></xsd:element>
+                                        </xsd:sequence>
+                                    </xsd:complexType>
+                                </xsd:element>
+                            </xsd:sequence>
+                        </xsd:complexType>
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
+        </xsd:element>            
+    </xsd:schema>
+</wsdl:types>
+<wsdl:message name="getAvailabilityRequest">
+    <wsdl:part name="parameters" element="tns:AvailabilityRequest"/>
+</wsdl:message>
+<wsdl:message name="getAvailabilityResponse">
+    <wsdl:part name="parameters" element="tns:AvailabilityResponse"/>
+</wsdl:message>
+<wsdl:portType name="CarAvailabilityPort">
+    <wsdl:operation name="getAvailability">
+      <wsdl:input message="tns:getAvailabilityRequest"/>
+      <wsdl:output message="tns:getAvailabilityResponse"/>
+  </wsdl:operation>
+</wsdl:portType>
+<wsdl:binding name="CarAvailabilitySOAP" type="tns:CarAvailabilityPort">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getAvailability">
+      <soap:operation soapAction="getAvailability" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+    </wsdl:input>
+    <wsdl:output>
+        <soap:body use="literal"/>
+    </wsdl:output>
+</wsdl:operation>
+</wsdl:binding>
+<wsdl:service name="CarAvailabilityService">
+    <wsdl:port binding="tns:CarAvailabilitySOAP" name="CarAvailabilitySOAPPort">
+      <soap:address location="http://localhost:8000/wsdl?wsdl"/>
+  </wsdl:port>
+</wsdl:service>
+</wsdl:definitions>

@@ -10,6 +10,7 @@ var locationsRouter = require('./routes/locations');
 var partnersRouter = require('./routes/partners');
 var bookingsRouter = require('./routes/bookings');
 var pessengersRouter = require('./routes/pessengers');
+// var soapRouter = require('./routes/soap');
 
 
 var app = express();
@@ -32,5 +33,6 @@ app.use('/api/v1/locations', locationsRouter);
 app.use('/api/v1/partners', partnersRouter);
 app.use('/api/v1/bookings', bookingsRouter);
 app.use('/api/v1/pessengers', pessengersRouter);
+// app.use('/soap/v1/', soapRouter.router);
 
 module.exports = app;

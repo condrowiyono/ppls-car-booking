@@ -18,7 +18,7 @@ exports.getAll = function(req, res){
 
 exports.create = function(req, res){
 	db.transactions.create({
-		partnerId: req.body.partnerId,
+		partnerId: 1,
 		carInfo: req.body.carInfo,
 		status: 0,
 		buyerName: req.body.buyerName,

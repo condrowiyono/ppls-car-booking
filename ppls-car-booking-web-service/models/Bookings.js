@@ -12,11 +12,11 @@ module.exports = (sequelize, Sequelize) => {
     field: 'transaction_id'
   },
   'dropLocation': {
-    type: Sequelize.INTEGER,
+    type: Sequelize.STRING,
     field: 'drop_location'
   },
   'pickLocation': {
-    type: Sequelize.INTEGER,
+    type: Sequelize.STRING,
     field: 'pick_location'
   },
   'dropTime': {

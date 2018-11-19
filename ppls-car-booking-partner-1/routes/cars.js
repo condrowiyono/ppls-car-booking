@@ -23,4 +23,33 @@ router.get('/', function(req, res, next) {
   	});
 });
 
+router.get('/getCarInfo', function(req, res, next) {
+	var id = req.query.id;
+	var query = "SELECT * FROM cars WHERE id = " + id;
+	res.locals.connection.query(query, function (error, results, fields) {
+	  	if(error){
+	  		res.send({"status": 500, "error": error, "response": null}); 
+	  		//If there is error, we send the error in the error section with 500 status
+	  	} else {
+  			res.send({"status": 200, "error": null, "response": results[0]});
+  			//If there is no error, all is good and response is 200 OK.
+	  	}
+  	});
+});
+
+router.put('/', function (req, res) {
+	var id = req.body.id;
+	var query = "UPDATE cars SET status = 1 WHERE id = " + id + " ";
+	res.locals.connection.query(query, function(error, results, fields) {
+		if(error){
+			res.send(JSON.stringify({"status": 500, "error": error, "response": null})); 
+			//If there is error, we send the error in the error section with 500 status
+		} else {
+			
+			res.send(JSON.stringify({"status": 200, "error": null, "response": results}));
+			//If there is no error, all is good and response is 200 OK.
+		}
+	})
+})
+
 module.exports = router;

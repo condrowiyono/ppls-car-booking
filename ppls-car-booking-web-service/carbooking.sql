@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 12, 2018 at 02:29 PM
+-- Generation Time: Nov 19, 2018 at 12:31 PM
 -- Server version: 5.7.24-0ubuntu0.16.04.1
--- PHP Version: 7.0.32-3+ubuntu16.04.1+deb.sury.org+1
+-- PHP Version: 7.0.32-4+ubuntu16.04.1+deb.sury.org+1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -29,8 +29,8 @@ SET time_zone = "+00:00";
 CREATE TABLE `bookings` (
   `id` int(10) NOT NULL,
   `transaction_id` int(10) NOT NULL,
-  `drop_location` int(10) NOT NULL,
-  `pick_location` int(10) NOT NULL,
+  `drop_location` varchar(100) NOT NULL,
+  `pick_location` varchar(100) NOT NULL,
   `drop_time` datetime NOT NULL,
   `pick_time` datetime NOT NULL,
   `fare` int(255) NOT NULL,
@@ -46,8 +46,9 @@ CREATE TABLE `bookings` (
 --
 
 INSERT INTO `bookings` (`id`, `transaction_id`, `drop_location`, `pick_location`, `drop_time`, `pick_time`, `fare`, `additional_fee`, `discount`, `total_amount`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, 1, '2018-11-12 10:00:00', '2018-11-11 00:00:00', 300000, 0, 0, 300000, '2018-11-11 13:32:52', NULL),
-(2, 2, 1, 1, '2018-11-13 00:00:00', '2018-11-11 00:00:00', 400000, 0, 0, 400000, '2018-11-11 14:00:37', NULL);
+(1, 1, '1', '1', '2018-11-12 10:00:00', '2018-11-11 00:00:00', 300000, 0, 0, 300000, '2018-11-11 13:32:52', NULL),
+(2, 2, '1', '1', '2018-11-13 00:00:00', '2018-11-11 00:00:00', 400000, 0, 0, 400000, '2018-11-11 14:00:37', NULL),
+(3, 15, 'JKT 2', 'null', '2018-11-23 17:00:00', '2018-11-22 17:00:00', 300000, 0, 0, 300000, '2018-11-19 05:29:28', '2018-11-19 05:29:28');
 
 -- --------------------------------------------------------
 
@@ -178,7 +179,20 @@ CREATE TABLE `transactions` (
 
 INSERT INTO `transactions` (`id`, `partner_id`, `car_info`, `status`, `buyer_name`, `buyer_email`, `invoice_id`, `total_amount`, `expired_time`, `booked_at`, `issued_at`, `cancel_at`, `failed_at`, `expired_at`, `created_at`, `updated_at`) VALUES
 (1, 1, '', 1, 'condro', 'condro', '212123123', 300000, '2018-11-12 00:00:00', '2018-11-11 13:32:03', NULL, NULL, NULL, NULL, '2018-11-12 00:17:17', NULL),
-(2, 2, '', 1, 'condro', 'condro', '2123123', 400000, '2018-11-13 00:00:00', '2018-11-11 13:59:22', NULL, NULL, NULL, NULL, '2018-11-12 00:17:17', NULL);
+(2, 2, '', 1, 'condro', 'condro', '2123123', 400000, '2018-11-13 00:00:00', '2018-11-11 13:59:22', NULL, NULL, NULL, NULL, '2018-11-12 00:17:17', NULL),
+(3, 1, '1', 0, 'Co', 'cp@so.co', '850', 10000, '2018-11-19 06:58:51', '2018-11-19 03:58:51', '2018-11-19 03:58:51', NULL, NULL, NULL, '2018-11-19 03:58:51', '2018-11-19 03:58:51'),
+(4, 1, '2', 1, 'C222', 'cp@so', '159', 10000, '2018-11-19 07:07:07', '2018-11-19 04:38:09', '2018-11-19 04:07:07', NULL, '2018-11-19 04:44:46', NULL, '2018-11-19 04:07:07', '2018-11-19 04:44:46'),
+(5, 1, '{"id":1,"model":"Daihatsu","type":"Xenia","seat":5,"gear":4,"have_ac":1,"fare":300000,"status":1,"checkpoint_id":1}', 0, 'Condro', 'condro@outlook.co.id', '468', 300000, '2018-11-19 07:13:12', '2018-11-19 04:13:12', '2018-11-19 04:13:12', NULL, NULL, NULL, '2018-11-19 04:13:12', '2018-11-19 04:13:12'),
+(6, 1, '{"id":1,"model":"Daihatsu","type":"Xenia","seat":5,"gear":4,"have_ac":1,"fare":300000,"status":1,"checkpoint_id":1}', 0, 'Condro', 'condro@outlook.co.id', '266', 300000, '2018-11-19 08:00:47', '2018-11-19 05:00:47', '2018-11-19 05:00:47', NULL, NULL, NULL, '2018-11-19 05:00:47', '2018-11-19 05:00:47'),
+(7, 1, '{"id":1,"model":"Daihatsu","type":"Xenia","seat":5,"gear":4,"have_ac":1,"fare":300000,"status":1,"checkpoint_id":1}', 0, 'Condro', 'condro@outlook.co.id', '299', 300000, '2018-11-19 08:00:53', '2018-11-19 05:00:53', '2018-11-19 05:00:53', NULL, NULL, NULL, '2018-11-19 05:00:53', '2018-11-19 05:00:53'),
+(8, 1, '1', 0, 'Co', 'co@cco', '382', 900000, '2018-11-19 08:04:06', '2018-11-19 05:04:06', '2018-11-19 05:04:06', NULL, NULL, NULL, '2018-11-19 05:04:06', '2018-11-19 05:04:06'),
+(9, 1, '{"id":2,"model":"Car Model","type":"Yamaha","seat":4,"gear":0,"have_ac":1,"fare":200000,"status":1,"checkpoint_id":1}', 0, 'Condro', 'condro@outlook.co.id', '100', 400000, '2018-11-19 08:06:28', '2018-11-19 05:06:28', '2018-11-19 05:06:28', NULL, NULL, NULL, '2018-11-19 05:06:28', '2018-11-19 05:06:28'),
+(10, 1, '{"id":2,"model":"Car Model","type":"Yamaha","seat":4,"gear":0,"have_ac":1,"fare":200000,"status":1,"checkpoint_id":1}', 0, 'Condro', 'condro@outlook.co.id', '646', 200000, '2018-11-19 08:13:06', '2018-11-19 05:13:06', '2018-11-19 05:13:06', NULL, NULL, NULL, '2018-11-19 05:13:06', '2018-11-19 05:13:06'),
+(11, 1, '{"id":1,"model":"Daihatsu","type":"Xenia","seat":5,"gear":4,"have_ac":1,"fare":300000,"status":1,"checkpoint_id":1}', 11, 'Condr', 'condro@outlook.co.id', '764', 600000, '2018-11-19 08:14:39', '2018-11-19 05:14:39', '2018-11-19 05:14:39', NULL, '2018-11-19 05:14:45', NULL, '2018-11-19 05:14:39', '2018-11-19 05:14:45'),
+(12, 1, '{"id":2,"model":"Car Model","type":"Yamaha","seat":4,"gear":0,"have_ac":1,"fare":200000,"status":1,"checkpoint_id":1}', 12, 'Condro', 'condro@outlook.co.id', '140', 200000, '2018-11-19 08:16:30', '2018-11-19 05:16:30', '2018-11-19 05:16:30', NULL, '2018-11-19 05:16:33', NULL, '2018-11-19 05:16:30', '2018-11-19 05:16:33'),
+(13, 1, '{"id":1,"model":"Daihatsu","type":"Xenia","seat":5,"gear":4,"have_ac":1,"fare":300000,"status":1,"checkpoint_id":1}', 13, 'Condro', 'condro@outlook.co.id', '646', 300000, '2018-11-19 08:19:30', '2018-11-19 05:19:30', '2018-11-19 05:19:30', NULL, '2018-11-19 05:19:36', NULL, '2018-11-19 05:19:30', '2018-11-19 05:19:36'),
+(14, 1, '{"id":1,"model":"Daihatsu","type":"Xenia","seat":5,"gear":4,"have_ac":1,"fare":300000,"status":1,"checkpoint_id":1}', 14, 'Condro', 'condro@outlook.co.id', '639', 300000, '2018-11-19 08:22:47', '2018-11-19 05:22:47', '2018-11-19 05:22:47', NULL, '2018-11-19 05:24:11', NULL, '2018-11-19 05:22:47', '2018-11-19 05:24:11'),
+(15, 1, '{"id":1,"model":"Daihatsu","type":"Xenia","seat":5,"gear":4,"have_ac":1,"fare":300000,"status":1,"checkpoint_id":1}', 1, 'Condro', 'condro@outlook.co.id', '235', 300000, '2018-11-19 08:26:33', '2018-11-19 05:26:33', '2018-11-19 05:26:33', NULL, '2018-11-19 05:29:28', NULL, '2018-11-19 05:26:33', '2018-11-19 05:29:28');
 
 --
 -- Indexes for dumped tables
@@ -235,7 +249,7 @@ ALTER TABLE `transactions`
 -- AUTO_INCREMENT for table `bookings`
 --
 ALTER TABLE `bookings`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `locations`
 --
@@ -260,7 +274,7 @@ ALTER TABLE `pessengers`
 -- AUTO_INCREMENT for table `transactions`
 --
 ALTER TABLE `transactions`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 --
 -- Constraints for dumped tables
 --
@@ -269,9 +283,7 @@ ALTER TABLE `transactions`
 -- Constraints for table `bookings`
 --
 ALTER TABLE `bookings`
-  ADD CONSTRAINT `bookings_ibfk_1` FOREIGN KEY (`transaction_id`) REFERENCES `transactions` (`id`),
-  ADD CONSTRAINT `bookings_ibfk_2` FOREIGN KEY (`drop_location`) REFERENCES `locations` (`id`),
-  ADD CONSTRAINT `bookings_ibfk_3` FOREIGN KEY (`pick_location`) REFERENCES `locations` (`id`);
+  ADD CONSTRAINT `bookings_ibfk_1` FOREIGN KEY (`transaction_id`) REFERENCES `transactions` (`id`);
 
 --
 -- Constraints for table `partners_location`

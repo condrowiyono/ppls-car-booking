@@ -8,7 +8,12 @@ router.get('/', function(req, res) {
 });
 
 router.post('/', function(req, res) {
+	console.log(req.body);
 	transactionsController.create(req,res)
+});
+
+router.post('/change-status', function(req, res) {
+	transactionsController.changeStatus(req,res)
 });
 
 router.get('/:id', function(req, res) {

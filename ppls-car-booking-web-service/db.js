@@ -29,6 +29,8 @@ db.transactions = require('./models/Transactions.js')(sequelize, Sequelize);
 //Relations
 db.bookings.hasMany(db.pessengers);  
 db.pessengers.belongsTo(db.bookings);  
+db.transactions.hasMany(db.bookings);  
+db.bookings.belongsTo(db.transactions);  
 
 
 module.exports = db;

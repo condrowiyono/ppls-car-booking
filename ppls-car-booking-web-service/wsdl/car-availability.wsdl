@@ -112,7 +112,7 @@
 </wsdl:binding>
 <wsdl:service name="CarAvailabilityService">
     <wsdl:port binding="tns:CarAvailabilitySOAP" name="CarAvailabilitySOAPPort">
-      <soap:address location="http://localhost:8000/wsdl?wsdl"/>
+      <soap:address location="http://localhost:8000/car/wsdl?wsdl"/>
   </wsdl:port>
 </wsdl:service>
 </wsdl:definitions>

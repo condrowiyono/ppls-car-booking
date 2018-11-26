@@ -64,6 +64,33 @@ exports.find = function(req, res) {
     });
 }
 
+exports.checkCode = function(req, res) {
+	db.bookings.findOne({
+		where: {
+			code: req.query.code
+		},
+		include: [{model: db.pessengers}]
+	}).then(bookings => {
+		if (bookings==null) {
+			res.json({
+	            "status": "Not Found",
+	            "data": bookings
+	        })
+		} else {
+	        res.json({
+	            "status": "success",
+	            "data": bookings
+	        })
+	    }
+    }).catch(function (err) {
+        res.json({
+	        "status": "error",
+	        "error": err,
+	        "data": null
+    	});
+    });
+}
+
 exports.update = function(req, res){
 }
 

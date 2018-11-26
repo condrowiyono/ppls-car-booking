@@ -7,6 +7,7 @@ module.exports = (sequelize, Sequelize) => {
       primaryKey: true,
       autoIncrement: true
   },
+  'code': Sequelize.STRING,
   'transactionId': {
     type: Sequelize.INTEGER,
     field: 'transaction_id'

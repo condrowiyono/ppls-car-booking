@@ -7,6 +7,10 @@ router.get('/', function(req, res) {
 	bookingsController.getAll(req,res)
 });
 
+router.get('/code', function(req, res) {
+	bookingsController.checkCode(req,res)
+});
+
 router.post('/', function(req, res) {
 	bookingsController.create(req,res)
 });

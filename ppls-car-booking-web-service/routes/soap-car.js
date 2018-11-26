@@ -41,7 +41,7 @@ function car_availability(args,callback) {
             rate: daydiff * responses[i].fare,
             Car: {
               carID: {
-                vendor: 1,
+                partner: 1,
                 id: responses[i].id
               },
               model: responses[i].model,
@@ -86,13 +86,12 @@ router.get('/', function (req, res) {
 })
 
 
-var soapProp = {
+var carSoapProp = {
   serviceObject : serviceObject,
   xml : xml,
-  router: router
+  router: router,
+  wsdlPath : "/car/wsdl"
 }
 
 
-module.exports = soapProp;
-
-var app = express();
+module.exports = carSoapProp;

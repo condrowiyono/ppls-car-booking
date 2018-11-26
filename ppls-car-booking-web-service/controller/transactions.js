@@ -62,6 +62,32 @@ exports.find = function(req, res) {
     });
 }
 
+exports.checkStatus = function(req, res) {
+	db.transactions.findOne({
+		where: {
+			invoiceId: req.query.invoice_id
+		}
+	}).then(transactions => {
+		if (transactions==null) {
+			res.json({
+	            "status": "Not Found",
+	            "data": transactions
+	        })
+		} else {
+	        res.json({
+	            "status": "success",
+	            "data": transactions
+	        })
+	    }
+    }).catch(function (err) {
+        res.json({
+	        "status": "error",
+	        "error": err,
+	        "data": null
+    	});
+    });
+}
+
 exports.successBooking = function(req, res){
 	db.transactions.update({
 		id: req.body.id,
@@ -112,6 +138,38 @@ exports.changeStatus = function(req, res){
 			"data" : transaction,
 		});
 	});
+}
+
+exports.addPayment = function(req, res){
+	var a ;
+	a = {
+			id: req.params.id,
+			status: req.body.status,
+			paymentInfo : req.body.payment,
+			bookedAt: Date.now()
+		}	 
+
+	db.transactions.update(a, {where:{id: req.params.id}})
+	.then(affectedRow => {
+		var transactions = db.transactions.findOne({where: {id:req.params.id}, include: [{model: db.bookings}]});
+		
+		return transactions
+	})
+
+	.then(transaction => {
+		var id = transaction.bookings[0].dataValues.id;
+		var b = { 
+			code : "BOOK" + new Date().getUTCMilliseconds(),
+		}
+
+		db.bookings.update(b,{where:{id: id}})
+
+
+		res.json({
+			"status": "Success",
+			"data" : transaction,
+		});
+	});	
 }
 
 exports.cancelBooking = function(req, res){

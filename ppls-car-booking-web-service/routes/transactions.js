@@ -16,6 +16,15 @@ router.post('/change-status', function(req, res) {
 	transactionsController.changeStatus(req,res)
 });
 
+router.post('/add-payment/:id', function(req, res) {
+	transactionsController.addPayment(req,res)
+});
+
+//by invoice
+router.get('/status', function(req, res) {
+	transactionsController.checkStatus(req,res)
+});
+
 router.get('/:id', function(req, res) {
 	transactionsController.find(req,res)
 });

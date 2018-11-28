@@ -9,6 +9,8 @@ var moment = require('moment');
 var axios = require('axios');
 var serviceBase = "http://localhost:3000/api/v1/";
 
+var camundaBase = "http://localhost:8080/engine-rest/process-definition/key/Car_Availabillity/start";
+
 
 function car_availability(args,callback) {
   var request = {
@@ -61,6 +63,25 @@ function car_availability(args,callback) {
     })
     .catch(function (error) {
       console.log(error);
+    });
+
+    axios({
+      method: 'POST',
+      url: camundaBase,
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      data: { "variables":
+        {
+        "FormDate": {
+          "value": request.pickDateTime
+        },
+        "FormPick": {
+          "value": request.pickLocation
+        }
+      }
+      }
     });
 
 

@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_08itfno" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="2.0.1">
   <bpmn:collaboration id="Collaboration_0n9z4kk">
-    <bpmn:participant id="Participant_0zlombt" name="Car Rental" processRef="Process_1" />
-    <bpmn:participant id="Participant_1fgyfer" name="Penggunass7" processRef="Process_04gtago" />
+    <bpmn:participant id="Participant_0zlombt" name="Car Availabillity" processRef="Car_Availabillity" />
+    <bpmn:participant id="Participant_1fgyfer" name="Pengguna" processRef="Process_04gtago" />
     <bpmn:messageFlow id="MessageFlow_11ssup6" sourceRef="Participant_1fgyfer" targetRef="StartEvent_1nvbj4r" />
     <bpmn:messageFlow id="MessageFlow_1bj2cee" sourceRef="Task_1on52om" targetRef="Participant_1fgyfer" />
+    <bpmn:messageFlow id="MessageFlow_1nolzjp" sourceRef="EndEvent_16776i3" targetRef="Participant_1fgyfer" />
   </bpmn:collaboration>
-  <bpmn:process id="Process_1" isExecutable="true">
+  <bpmn:process id="Car_Availabillity" isExecutable="true">
     <bpmn:laneSet id="LaneSet_1u76b3w">
-      <bpmn:lane id="Lane_0ul34o2" name="Pencarians3s">
+      <bpmn:lane id="Lane_0ul34o2" name="Pencarian">
         <bpmn:flowNodeRef>Task_1on52om</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>StartEvent_1nvbj4r</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>EndEvent_16776i3</bpmn:flowNodeRef>
       </bpmn:lane>
     </bpmn:laneSet>
     <bpmn:dataStoreReference id="DataStoreReference_03h1qto" name="Booking Data Store" />
-    <bpmn:serviceTask id="Task_1on52om" name="Cek Ketersediaan Mobilsss6">
+    <bpmn:serviceTask id="Task_1on52om" name="Cek Ketersediaan Mobil">
       <bpmn:extensionElements>
         <camunda:connector>
           <camunda:inputOutput>
@@ -43,11 +44,11 @@ url;</camunda:script>
     <bpmn:startEvent id="StartEvent_1nvbj4r" name="Book Request Detail">
       <bpmn:outgoing>SequenceFlow_0gwvd3i</bpmn:outgoing>
     </bpmn:startEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_0jyvt8l" sourceRef="Task_1on52om" targetRef="EndEvent_16776i3" />
+    <bpmn:sequenceFlow id="SequenceFlow_0gwvd3i" sourceRef="StartEvent_1nvbj4r" targetRef="Task_1on52om" />
     <bpmn:endEvent id="EndEvent_16776i3">
       <bpmn:incoming>SequenceFlow_0jyvt8l</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:sequenceFlow id="SequenceFlow_0jyvt8l" sourceRef="Task_1on52om" targetRef="EndEvent_16776i3" />
-    <bpmn:sequenceFlow id="SequenceFlow_0gwvd3i" sourceRef="StartEvent_1nvbj4r" targetRef="Task_1on52om" />
   </bpmn:process>
   <bpmn:process id="Process_04gtago" isExecutable="false" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
@@ -84,9 +85,6 @@ url;</camunda:script>
           <dc:Bounds x="412" y="280" width="71" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="EndEvent_16776i3_di" bpmnElement="EndEvent_16776i3">
-        <dc:Bounds x="780" y="237" width="36" height="36" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_0jyvt8l_di" bpmnElement="SequenceFlow_0jyvt8l">
         <di:waypoint x="742" y="255" />
         <di:waypoint x="780" y="255" />
@@ -95,6 +93,13 @@ url;</camunda:script>
         <di:waypoint x="465" y="255" />
         <di:waypoint x="642" y="255" />
       </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MessageFlow_1nolzjp_di" bpmnElement="MessageFlow_1nolzjp">
+        <di:waypoint x="798" y="237" />
+        <di:waypoint x="798" y="159" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="EndEvent_095stg6_di" bpmnElement="EndEvent_16776i3">
+        <dc:Bounds x="780" y="237" width="36" height="36" />
+      </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
 </bpmn:definitions>

@@ -64,7 +64,6 @@ query;</camunda:script>
     <bpmn:endEvent id="EndEvent_08tiu9n">
       <bpmn:incoming>SequenceFlow_0gdcf6d</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:sequenceFlow id="SequenceFlow_0gdcf6d" sourceRef="ExclusiveGateway_1u1osz1" targetRef="EndEvent_08tiu9n" />
     <bpmn:serviceTask id="Task_0ab6av1" name="Cek Id Transaksi">
       <bpmn:extensionElements>
         <camunda:connector>
@@ -91,6 +90,7 @@ data;</camunda:script>
       <bpmn:incoming>SequenceFlow_03jvea4</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0f3cdr2</bpmn:outgoing>
     </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="SequenceFlow_0gdcf6d" name="l" sourceRef="ExclusiveGateway_1u1osz1" targetRef="EndEvent_08tiu9n" />
   </bpmn:process>
   <bpmn:process id="Process_0dip5ez" isExecutable="false" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
@@ -151,13 +151,16 @@ data;</camunda:script>
       <bpmndi:BPMNShape id="EndEvent_08tiu9n_di" bpmnElement="EndEvent_08tiu9n">
         <dc:Bounds x="183" y="367" width="36" height="36" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="SequenceFlow_0gdcf6d_di" bpmnElement="SequenceFlow_0gdcf6d">
-        <di:waypoint x="201" y="233" />
-        <di:waypoint x="201" y="367" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="ServiceTask_0dmu5uq_di" bpmnElement="Task_0ab6av1">
         <dc:Bounds x="26" y="168" width="100" height="80" />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0gdcf6d_di" bpmnElement="SequenceFlow_0gdcf6d">
+        <di:waypoint x="201" y="233" />
+        <di:waypoint x="201" y="367" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="215" y="297" width="3" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
 </bpmn:definitions>

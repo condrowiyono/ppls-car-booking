@@ -7,11 +7,35 @@ var path = require("path");
 var router = express.Router();
 const db = require('../db');
 
+var axios = require('axios');
+var camundaBase = "http://localhost:8080/engine-rest/process-definition/key/Cancel_Booking/start";
+
+
 function cancel_book_car(args,callback) {
   var req = {
     idTransaksi  : args.idTransaksi,
   }
-  
+
+  //////////
+  axios({
+    method: 'POST',
+    url: camundaBase,
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    },
+    data: { "variables":
+        {
+        "FormKodeBooking": {
+          "value": req.idTransaksi
+        },
+        
+      }
+    }
+  });
+
+  ////////
+  /*
   db.transactions.update({
     id: req.idTransaksi,
     status: 2,
@@ -32,7 +56,17 @@ function cancel_book_car(args,callback) {
       status : transaction.status
     })
   });
-  
+  */
+  db.transactions.findOne({where: {id:req.idTransaksi}})
+  .then(transaction => {
+    return callback({
+      idTransaksi : transaction.id,
+      buyerName : transaction.buyerName,
+      buyerEmail : transaction.buyerEmail,
+      totalAmount : transaction.totalAmount,
+      status : transaction.status
+    })
+  });
 }
 
 var serviceObject = {

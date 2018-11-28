@@ -12,7 +12,6 @@
         <bpmn:flowNodeRef>Task_1on52om</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>StartEvent_1nvbj4r</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>EndEvent_16776i3</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Task_1yrpv1r</bpmn:flowNodeRef>
       </bpmn:lane>
     </bpmn:laneSet>
     <bpmn:dataStoreReference id="DataStoreReference_03h1qto" name="Booking Data Store" />
@@ -38,33 +37,17 @@ url;</camunda:script>
           <camunda:connectorId>http-connector</camunda:connectorId>
         </camunda:connector>
       </bpmn:extensionElements>
-      <bpmn:incoming>SequenceFlow_0pu6g8q</bpmn:incoming>
+      <bpmn:incoming>SequenceFlow_0gwvd3i</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0jyvt8l</bpmn:outgoing>
     </bpmn:serviceTask>
     <bpmn:startEvent id="StartEvent_1nvbj4r" name="Book Request Detail">
-      <bpmn:outgoing>SequenceFlow_11dt0ta</bpmn:outgoing>
+      <bpmn:outgoing>SequenceFlow_0gwvd3i</bpmn:outgoing>
     </bpmn:startEvent>
     <bpmn:endEvent id="EndEvent_16776i3">
       <bpmn:incoming>SequenceFlow_0jyvt8l</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:userTask id="Task_1yrpv1r" name="Terima tanggal dan penjemputan" camunda:assignee="demo">
-      <bpmn:extensionElements>
-        <camunda:formData>
-          <camunda:formField id="FormDate" label="date" type="string" />
-          <camunda:formField id="FormPick" label="pick" type="string" />
-        </camunda:formData>
-      </bpmn:extensionElements>
-      <bpmn:incoming>SequenceFlow_11dt0ta</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_0pu6g8q</bpmn:outgoing>
-      <bpmn:property id="Property_1qbs93g" name="__targetRef_placeholder" />
-      <bpmn:dataInputAssociation id="DataInputAssociation_1g6yoj2">
-        <bpmn:sourceRef>DataStoreReference_03h1qto</bpmn:sourceRef>
-        <bpmn:targetRef>Property_1qbs93g</bpmn:targetRef>
-      </bpmn:dataInputAssociation>
-    </bpmn:userTask>
-    <bpmn:sequenceFlow id="SequenceFlow_11dt0ta" sourceRef="StartEvent_1nvbj4r" targetRef="Task_1yrpv1r" />
-    <bpmn:sequenceFlow id="SequenceFlow_0pu6g8q" sourceRef="Task_1yrpv1r" targetRef="Task_1on52om" />
     <bpmn:sequenceFlow id="SequenceFlow_0jyvt8l" sourceRef="Task_1on52om" targetRef="EndEvent_16776i3" />
+    <bpmn:sequenceFlow id="SequenceFlow_0gwvd3i" sourceRef="StartEvent_1nvbj4r" targetRef="Task_1on52om" />
   </bpmn:process>
   <bpmn:process id="Process_04gtago" isExecutable="false" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
@@ -108,20 +91,9 @@ url;</camunda:script>
         <di:waypoint x="742" y="255" />
         <di:waypoint x="780" y="255" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="UserTask_1j9xf2p_di" bpmnElement="Task_1yrpv1r">
-        <dc:Bounds x="504" y="215" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="SequenceFlow_0pu6g8q_di" bpmnElement="SequenceFlow_0pu6g8q">
-        <di:waypoint x="604" y="255" />
-        <di:waypoint x="642" y="255" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="SequenceFlow_11dt0ta_di" bpmnElement="SequenceFlow_11dt0ta">
+      <bpmndi:BPMNEdge id="SequenceFlow_0gwvd3i_di" bpmnElement="SequenceFlow_0gwvd3i">
         <di:waypoint x="465" y="255" />
-        <di:waypoint x="504" y="255" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="DataInputAssociation_1g6yoj2_di" bpmnElement="DataInputAssociation_1g6yoj2">
-        <di:waypoint x="471" y="313" />
-        <di:waypoint x="505" y="289" />
+        <di:waypoint x="642" y="255" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

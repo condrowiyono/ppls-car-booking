@@ -11,6 +11,7 @@ var partnersRouter = require('./routes/partners');
 var bookingsRouter = require('./routes/bookings');
 var pessengersRouter = require('./routes/pessengers');
 var bookCarRouter = require('./routes/book-car');
+var documentationRouter = require('./routes/documentation');
 
 
 // var soapRouter = require('./routes/soap');
@@ -31,6 +32,7 @@ app.use(cookieParser());
 
 
 app.use('/api/v1/cars', carsRouter);
+app.use('/documentation', documentationRouter);
 app.use('/api/v1/transactions', transactionsRouter);
 app.use('/api/v1/locations', locationsRouter);
 app.use('/api/v1/partners', partnersRouter);

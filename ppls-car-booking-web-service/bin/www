@@ -8,9 +8,9 @@ var app = require('../app');
 var debug = require('debug')('carbooking-api:server');
 var http = require('http');
 var soap = require('soap');
-var carSoapRouter = require("../routes/soap-car")
-var bookSoapRouter = require("../routes/soap-book")
-
+var carSoapRouter = require("../routes/soap-car");
+var bookSoapRouter = require("../routes/soap-book");
+var cancelBookSoapRouter = require("../routes/soap-cancel-book")
 /**
  * Get port from environment and store in Express.
  */
@@ -35,6 +35,8 @@ server.listen(port, function () {
   soap.listen(server, carSoapRouter.wsdlPath, carSoapRouter.serviceObject, carSoapRouter.xml);
   //car Booking
   soap.listen(server, bookSoapRouter.wsdlPath, bookSoapRouter.serviceObject, bookSoapRouter.xml);
+  
+  soap.listen(server, cancelBookSoapRouter.wsdlPath, cancelBookSoapRouter.serviceObject, cancelBookSoapRouter.xml);
   
   console.log("Is Up!!!");
 });

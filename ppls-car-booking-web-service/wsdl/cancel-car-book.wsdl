@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions 
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"  
+    xmlns:tns="http://www.example.org/CancelCarBook/" 
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+    name="CancelCarBook" 
+    targetNamespace="http://www.example.org/CancelCarBook/">
+    <wsdl:types>
+        <xsd:schema targetNamespace="http://www.example.org/CancelCarBook/">
+            <xsd:element name="CancelBookRequest">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="idTransaksi" type="xsd:string"></xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>  
+            </xsd:element>
+            <xsd:element name="CancelBookResponse">
+                 <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="IdTransaksi" type="xsd:string"></xsd:element>
+                        <xsd:element name="invoiceId" type="xsd:string"></xsd:element>
+                        <xsd:element name="buyerName" type="xsd:string"></xsd:element>
+                        <xsd:element name="buyerEmail" type="xsd:string"></xsd:element>
+                        <xsd:element name="totalAmount" type="xsd:string"></xsd:element>
+                        <xsd:element name="status" type="xsd:string"></xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>     
+            </xsd:element>            
+        </xsd:schema>
+    </wsdl:types>
+<wsdl:message name="getCancelBookRequest">
+    <wsdl:part name="parameters" element="tns:CancelBookRequest"/>
+</wsdl:message>
+<wsdl:message name="getCancelBookResponse">
+    <wsdl:part name="parameters" element="tns:CancelBookResponse"/>
+</wsdl:message>
+<wsdl:portType name="CancelBookPort">
+    <wsdl:operation name="cancelBookCar">
+      <wsdl:input message="tns:getCancelBookRequest"/>
+      <wsdl:output message="tns:getCancelBookResponse"/>
+  </wsdl:operation>
+</wsdl:portType>
+<wsdl:binding name="CancelBookSOAP" type="tns:CancelBookPort">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="cancelBookCar">
+      <soap:operation soapAction="cancelBookCar" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+    </wsdl:input>
+    <wsdl:output>
+        <soap:body use="literal"/>
+    </wsdl:output>
+</wsdl:operation>
+</wsdl:binding>
+<wsdl:service name="CancelBookService">
+    <wsdl:port binding="tns:CancelBookSOAP" name="CancelBookSOAPPort">
+      <soap:address location="http://localhost:8000/cancel-book/wsdl?wsdl"/>
+  </wsdl:port>
+</wsdl:service>
+</wsdl:definitions>

@@ -7,9 +7,9 @@ var path = require("path");
 var router = express.Router();
 var moment = require('moment');
 var axios = require('axios');
-var serviceBase = "http://localhost:3000/api/v1/";
+var serviceBase =  process.env.CAR_PARTNER_URL + "/api/v1/";
 
-var camundaBase = "http://localhost:8080/engine-rest/process-definition/key/Car_Availabillity/start";
+var camundaBase = process.env.CAMUNDA_URL + "/engine-rest/process-definition/key/Car_Availabillity/start";
 
 
 function car_availability(args,callback) {
@@ -64,7 +64,7 @@ function car_availability(args,callback) {
     .catch(function (error) {
       console.log(error);
     });
-
+    
     axios({
       method: 'POST',
       url: camundaBase,
@@ -82,7 +82,9 @@ function car_availability(args,callback) {
         }
       }
       }
-    });
+    }).catch(function (error) {
+      console.log(error);
+    });;
 
 
 }

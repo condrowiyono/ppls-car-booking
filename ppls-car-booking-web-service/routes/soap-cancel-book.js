@@ -8,7 +8,8 @@ var router = express.Router();
 const db = require('../db');
 
 var axios = require('axios');
-var camundaBase = "http://localhost:8080/engine-rest/process-definition/key/Cancel_Booking/start";
+
+var camundaBase = process.env.CAMUNDA_URL + "/engine-rest/process-definition/key/Car_Availabillity/start";
 
 
 function cancel_book_car(args,callback) {

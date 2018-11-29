@@ -3,7 +3,7 @@ var router = express.Router();
 var moment = require('moment');
 var axios = require('axios');
 var qs = require('qs');
-var serviceBase = "http://localhost:3000/api/v1/";
+var serviceBase =  process.env.CAR_PARTNER_URL + "/api/v1/";
 
 router.get('/', function(req, res, next) {
 	//get data from partner

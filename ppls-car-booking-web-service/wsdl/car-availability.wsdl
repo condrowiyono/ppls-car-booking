@@ -28,27 +28,13 @@
                         <xsd:element name="searchSummary">
                          <xsd:complexType>
                             <xsd:sequence>
-                                <xsd:element name="pickLocation"
-                                    type="xsd:string">
-                                </xsd:element>
-                                <xsd:element name="pickDateTime"
-                                    type="xsd:dateTime">
-                                </xsd:element>
-                                <xsd:element name="dropLocation"
-                                    type="xsd:string">
-                                </xsd:element>
-                                <xsd:element name="dropDateTime"
-                                    type="xsd:dateTime">
-                                </xsd:element>
-                                <xsd:element name="typeCode" type="xsd:string"
-                                    maxOccurs="1" minOccurs="0">
-                                </xsd:element>
-                                <xsd:element name="sortMethod" type="xsd:int"
-                                    maxOccurs="1" minOccurs="0">
-                                </xsd:element>
-                                <xsd:element name="priceFrom" type="xsd:float"
-                                    maxOccurs="1" minOccurs="0">
-                                </xsd:element>
+                                <xsd:element name="pickLocation" type="xsd:string"></xsd:element>
+                                <xsd:element name="pickDateTime" type="xsd:dateTime"></xsd:element>
+                                <xsd:element name="dropLocation" type="xsd:string"></xsd:element>
+                                <xsd:element name="dropDateTime" type="xsd:dateTime"></xsd:element>
+                                <xsd:element name="typeCode" type="xsd:string" maxOccurs="1" minOccurs="0"> </xsd:element>
+                                <xsd:element name="sortMethod" type="xsd:int" maxOccurs="1" minOccurs="0"></xsd:element>
+                                <xsd:element name="priceFrom" type="xsd:float" maxOccurs="1" minOccurs="0"></xsd:element>
                                 <xsd:element name="priceTo" type="xsd:float" maxOccurs="1" minOccurs="0"></xsd:element>
                             </xsd:sequence>
                         </xsd:complexType>

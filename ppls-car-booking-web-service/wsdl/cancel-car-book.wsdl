@@ -55,7 +55,7 @@
 </wsdl:binding>
 <wsdl:service name="CancelBookService">
     <wsdl:port binding="tns:CancelBookSOAP" name="CancelBookSOAPPort">
-      <soap:address location="http://localhost:8000/cancel-book/wsdl?wsdl"/>
+      <soap:address location="http://167.205.35.228:8000/cancel-book/wsdl?wsdl"/>
   </wsdl:port>
 </wsdl:service>
 </wsdl:definitions>
